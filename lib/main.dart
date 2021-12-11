@@ -1,7 +1,10 @@
 import 'dart:developer';
+import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'customColors.dart';
+import 'custom_colors.dart';
+import 'package:youtube_explode_dart/youtube_explode_dart.dart';
+import 'package:validators/validators.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,7 +30,6 @@ class MainForm extends StatefulWidget {
 
 class _MainFormState extends State<MainForm> {
   final linkTextController = TextEditingController();
-
   final ButtonStyle style = ElevatedButton.styleFrom(
       textStyle: const TextStyle(fontSize: 20.0),
       onPrimary: CustomColors.replyBlack(),
@@ -41,7 +43,49 @@ class _MainFormState extends State<MainForm> {
   }
 
   void buttonPress() {
-    inspect(linkTextController.text);
+    String videoLink = linkTextController.text;
+
+    if (videoLink.isNotEmpty) {
+      if (isURL(videoLink)) {
+        // TODO: Loading animation
+        videoInfo(videoLink);
+        //print(videoTitle);
+      } else {
+        showAlertDialog(context, 'Your link is invalid, please try again.');
+      }
+    } else {
+      showAlertDialog(context, 'Please provide a link.');
+    }
+  }
+
+  Future<void> videoInfo(String link) async {
+    final yt = YoutubeExplode();
+    var video = await yt.videos.get(link);
+    print(video.title);
+
+    yt.close();
+  }
+
+  void showAlertDialog(BuildContext context, String message) {
+    Widget okButton = TextButton(
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+      child: const Text('OK'),
+    );
+
+    AlertDialog dialog = AlertDialog(
+      title: const Text('There was a problem!'),
+      content: Text(message),
+      actions: [okButton],
+    );
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return dialog;
+      },
+    );
   }
 
   @override
@@ -56,7 +100,25 @@ class _MainFormState extends State<MainForm> {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: CustomTextField(controller: linkTextController),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(5.0),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 15),
+                child: TextField(
+                  controller: linkTextController,
+                  style: const TextStyle(
+                    fontSize: 18.0,
+                  ),
+                  decoration: const InputDecoration(
+                    border: InputBorder.none,
+                    hintText: 'YouTube Link',
+                  ),
+                ),
+              ),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -68,38 +130,6 @@ class _MainFormState extends State<MainForm> {
           )
         ],
         mainAxisAlignment: MainAxisAlignment.center,
-      ),
-    );
-  }
-}
-
-class CustomTextField extends StatelessWidget {
-  const CustomTextField({
-    Key? key,
-    this.controller,
-  }) : super(key: key);
-
-  final TextEditingController? controller;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(5.0),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.only(left: 15),
-        child: TextField(
-          controller: controller,
-          style: const TextStyle(
-            fontSize: 18.0,
-          ),
-          decoration: const InputDecoration(
-            border: InputBorder.none,
-            hintText: 'YouTube Link',
-          ),
-        ),
       ),
     );
   }
