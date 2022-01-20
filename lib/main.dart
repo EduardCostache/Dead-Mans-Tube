@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:youtube_downloader/Screens/home_page.dart';
-import 'custom_colors.dart';
 
 void main() {
   runApp(const MyApp());

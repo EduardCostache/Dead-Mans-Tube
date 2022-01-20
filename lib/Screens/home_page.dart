@@ -37,12 +37,12 @@ class _HomePageState extends State<HomePage> {
   }
 
   List<Widget> screens = [
-    PasteLinkScreen(),
-    BrowserScreen(),
+    const PasteLinkScreen(),
+    const BrowserScreen(),
   ];
 
   List<BottomNavigationBarItem> bottomNavItems = [
-    BottomNavigationBarItem(icon: Icon(Icons.paste), label: 'Paste link'),
-    BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Browse')
+    const BottomNavigationBarItem(icon: Icon(Icons.paste), label: 'Paste link'),
+    const BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Browse')
   ];
 }
