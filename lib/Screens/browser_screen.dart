@@ -17,7 +17,8 @@ class _BrowserScreenState extends State<BrowserScreen> {
   WebViewController? _controller;
 
   void checkIsVideo() async {
-    if (await _controller!.currentUrl() == 'https://m.youtube.com/') {
+    if (await _controller!.currentUrl() == 'https://m.youtube.com/' ||
+        await _controller!.currentUrl() == _webViewLink) {
       setState(() {
         _showDownloadButton = false;
       });
@@ -41,15 +42,15 @@ class _BrowserScreenState extends State<BrowserScreen> {
           });
         },
       ),
-      floatingActionButton: _showDownloadButton == false
-          ? Container()
-          : FloatingActionButton(
+      floatingActionButton: _showDownloadButton == true
+          ? FloatingActionButton(
               onPressed: () async {
                 print(await _controller!.currentUrl());
               },
               backgroundColor: CustomColors.replyOrange(),
               child: const Icon(Icons.download),
-            ),
+            )
+          : Container(),
     );
   }
 }
