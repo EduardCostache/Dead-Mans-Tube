@@ -17,10 +17,12 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: CustomColors.replyOrange(),
-        title: const Text('Youtube downloader'),
-      ),
+      appBar: _currentIndex == 0
+          ? AppBar(
+              backgroundColor: CustomColors.replyOrange(),
+              title: const Text('Youtube downloader'),
+            )
+          : null,
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: CustomColors.replyOrange(),
         selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
