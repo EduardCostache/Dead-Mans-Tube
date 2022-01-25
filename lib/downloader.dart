@@ -6,8 +6,7 @@ import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
 class Download {
   Future<void> downloadMP3(String link) async {
-    final baseStorage = await getExternalStorageDirectory();
-    Directory(baseStorage.toString()).createSync();
+    final baseStorage = await getApplicationDocumentsDirectory();
 
     // Fethching the audio stream from YouTube
     var videoID = link.substring(link.length - 11);
@@ -49,5 +48,29 @@ class Download {
 
     // Close the YoutubeExplode's http client.
     yt.close();
+  }
+
+  Future<File> get _localFile async {
+    final storagePath = await getApplicationDocumentsDirectory();
+    return File('$storagePath/counter.txt');
+  }
+
+  Future<void> testDownload() async {
+    var file = await _localFile;
+    file.writeAsString('test complete');
+  }
+
+  Future<String> fetchData() async {
+    try {
+      final file = await _localFile;
+
+      // Read the file
+      final contents = await file.readAsString();
+
+      return contents;
+    } catch (e) {
+      // If encountering an error, return 0
+      return 'test fail';
+    }
   }
 }
