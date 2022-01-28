@@ -33,7 +33,7 @@ class _PasteLinkScreenState extends State<PasteLinkScreen> {
                 } else {
                   //TODO: DOWNLOAD THE VIDEO
                   //Download().downloadMP3(link);
-                  Download().testDownload();
+                  Download().downloadAudio(link);
                   _textEditingController.clear();
                 }
               },
@@ -44,28 +44,6 @@ class _PasteLinkScreenState extends State<PasteLinkScreen> {
                 width: MediaQuery.of(context).size.width,
                 child: const Text(
                   'Download MP3',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
-                var data = Download().fetchData();
-
-                ScaffoldMessenger.of(context)
-                    .showSnackBar(SnackBar(content: Text(data.toString())));
-              },
-              child: Container(
-                color: CustomColors.replyOrange(),
-                margin: const EdgeInsets.only(top: 10),
-                padding: const EdgeInsets.all(20),
-                width: MediaQuery.of(context).size.width,
-                child: const Text(
-                  'Testing',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
