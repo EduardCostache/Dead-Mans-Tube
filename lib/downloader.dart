@@ -11,8 +11,10 @@ class Download {
     return directory.path;
   }
 
+  void showFile() {}
+
   Future<void> downloadAudio(String link) async {
-    final baseStorage = _localPath;
+    final baseStorage = await _localPath;
 
     // Fethching the audio stream from YouTube
     var videoID = link.substring(link.length - 11);

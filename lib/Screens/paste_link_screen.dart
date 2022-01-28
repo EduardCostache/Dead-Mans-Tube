@@ -31,8 +31,6 @@ class _PasteLinkScreenState extends State<PasteLinkScreen> {
                   ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Please enter a link!')));
                 } else {
-                  //TODO: DOWNLOAD THE VIDEO
-                  //Download().downloadMP3(link);
                   Download().downloadAudio(link);
                   _textEditingController.clear();
                 }
@@ -44,6 +42,23 @@ class _PasteLinkScreenState extends State<PasteLinkScreen> {
                 width: MediaQuery.of(context).size.width,
                 child: const Text(
                   'Download MP3',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {},
+              child: Container(
+                color: CustomColors.replyOrange(),
+                margin: const EdgeInsets.only(top: 10),
+                padding: const EdgeInsets.all(20),
+                width: MediaQuery.of(context).size.width,
+                child: const Text(
+                  'Test if file exists',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
