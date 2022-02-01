@@ -51,14 +51,40 @@ class _PasteLinkScreenState extends State<PasteLinkScreen> {
               ),
             ),
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                var text = _textEditingController.text;
+
+                Download().writeToTestFile(text);
+              },
               child: Container(
                 color: CustomColors.replyOrange(),
                 margin: const EdgeInsets.only(top: 10),
                 padding: const EdgeInsets.all(20),
                 width: MediaQuery.of(context).size.width,
                 child: const Text(
-                  'Test if file exists',
+                  'Write to File',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () async {
+                var text = await Download().readFromTestFile();
+
+                ScaffoldMessenger.of(context)
+                    .showSnackBar(SnackBar(content: Text(text)));
+              },
+              child: Container(
+                color: CustomColors.replyOrange(),
+                margin: const EdgeInsets.only(top: 10),
+                padding: const EdgeInsets.all(20),
+                width: MediaQuery.of(context).size.width,
+                child: const Text(
+                  'Read from File',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
