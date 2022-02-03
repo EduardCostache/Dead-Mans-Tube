@@ -52,7 +52,7 @@ class _BrowserScreenState extends State<BrowserScreen> {
               onPressed: () async {
                 var link = await _controller!.currentUrl();
 
-                Download().downloadAudio(link!);
+                //Download().downloadAudio(link!);
               },
               backgroundColor: CustomColors.replyOrange(),
               child: const Icon(Icons.download),

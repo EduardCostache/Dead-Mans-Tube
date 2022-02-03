@@ -31,7 +31,8 @@ class _PasteLinkScreenState extends State<PasteLinkScreen> {
                   ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Please enter a link!')));
                 } else {
-                  Download().downloadAudio(link);
+                  //Download().downloadAudioToFile(link);
+                  Download().downloadUsingDestinyEDPlugin('testing', link);
                   _textEditingController.clear();
                 }
               },

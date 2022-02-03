@@ -31,6 +31,7 @@ dependencies:
   validators: ^3.0.0
   webview_flutter: ^3.0.0
   path_provider: ^2.0.8
+  flutter_youtube_downloader: any
 
   flutter:
     sdk: flutter

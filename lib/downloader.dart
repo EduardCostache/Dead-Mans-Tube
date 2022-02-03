@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
+import 'package:flutter_youtube_downloader/flutter_youtube_downloader.dart';
 
 class Download {
   Future<String> get _localPath async {
@@ -21,7 +22,7 @@ class Download {
     return File('$path/$videoName');
   }
 
-  Future<void> downloadAudio(String link) async {
+  Future<void> downloadAudioToFile(String link) async {
     // Fethching the audio stream from YouTube
     var videoID = link.substring(link.length - 11);
     var yt = YoutubeExplode();
@@ -54,6 +55,13 @@ class Download {
     // Close the YoutubeExplode's http client.
     yt.close();
     inspect('Done');
+  }
+
+  Future<void> downloadUsingDestinyEDPlugin(
+      String title, String videoLink) async {
+    var link =
+        await FlutterYoutubeDownloader.extractYoutubeLink(videoLink, 140);
+    await FlutterYoutubeDownloader.downloadVideo(link, title, 140);
   }
 
   Future<File> writeToTestFile(String text) async {
