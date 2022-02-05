@@ -59,9 +59,7 @@ class Download {
 
   Future<void> downloadUsingDestinyEDPlugin(
       String title, String videoLink) async {
-    var link =
-        await FlutterYoutubeDownloader.extractYoutubeLink(videoLink, 140);
-    await FlutterYoutubeDownloader.downloadVideo(link, title, 140);
+    await FlutterYoutubeDownloader.downloadVideo(videoLink, title, 140);
   }
 
   Future<File> writeToTestFile(String text) async {

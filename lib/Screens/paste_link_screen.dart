@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:youtube_downloader/custom_colors.dart';
 import 'package:youtube_downloader/downloader.dart';
 
@@ -24,16 +27,22 @@ class _PasteLinkScreenState extends State<PasteLinkScreen> {
               decoration: const InputDecoration(labelText: 'Youtube Link'),
             ),
             GestureDetector(
-              onTap: () {
+              onTap: () async {
                 var link = _textEditingController.text;
                 //TODO: ADD VALIDATION FOR INCORRECT LINK
                 if (link.isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Please enter a link!')));
                 } else {
-                  //Download().downloadAudioToFile(link);
-                  Download().downloadUsingDestinyEDPlugin('testing', link);
-                  _textEditingController.clear();
+                  final permissionStatus = await Permission.storage.request();
+
+                  if (permissionStatus.isGranted) {
+                    //Download().downloadAudioToFile(link);
+                    Download().downloadUsingDestinyEDPlugin('testing', link);
+                    _textEditingController.clear();
+                  } else {
+                    inspect('Permission to External Storage not Granted');
+                  }
                 }
               },
               child: Container(
