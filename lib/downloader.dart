@@ -1,28 +1,27 @@
 import 'dart:developer';
-import 'dart:io';
 
-import 'package:path_provider/path_provider.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 import 'package:flutter_youtube_downloader/flutter_youtube_downloader.dart';
 
 class Download {
-  Future<String> get _localPath async {
-    final directory = await getApplicationDocumentsDirectory();
+  Future<void> downloadAudio(String videoLink) async {
+    var videoID = videoLink.substring(videoLink.length - 11);
+    var yt = YoutubeExplode();
+    var video = await yt.videos.get(videoID);
 
-    return directory.path;
+    var manifest = await yt.videos.streamsClient.getManifest(videoID);
+    var streams = manifest.audioOnly.withHighestBitrate();
+    var audioTag = streams.tag;
+
+    var title = video.title;
+
+    await FlutterYoutubeDownloader.downloadVideo(videoLink, title, audioTag);
   }
 
-  Future<File> get _localFile async {
-    final path = await _localPath;
-    return File('$path/test.txt');
-  }
+  /* --------------------Testing-----------------------*/
+  /*
 
-  Future<File> _videoFile(String videoName) async {
-    final path = await _localPath;
-    return File('$path/$videoName');
-  }
-
-  Future<void> downloadAudioToFile(String link) async {
+Future<void> downloadAudioToFile(String link) async {
     // Fethching the audio stream from YouTube
     var videoID = link.substring(link.length - 11);
     var yt = YoutubeExplode();
@@ -57,16 +56,20 @@ class Download {
     inspect('Done');
   }
 
-  Future<void> downloadUsingDestinyEDPlugin(
-      String title, String videoLink) async {
-    await FlutterYoutubeDownloader.downloadVideo(videoLink, title, 140);
+  Future<File> get _localFile async {
+    final path = await _localPath;
+    return File('$path/test.txt');
   }
 
-  Future<File> writeToTestFile(String text) async {
-    final file = await _localFile;
+  Future<File> _videoFile(String videoName) async {
+    final path = await _localPath;
+    return File('$path/$videoName');
+  }
 
-    // Write the file
-    return file.writeAsString(text);
+  Future<String> get _localPath async {
+    final directory = await getApplicationDocumentsDirectory();
+
+    return directory.path;
   }
 
   Future<String> readFromTestFile() async {
@@ -82,4 +85,12 @@ class Download {
       return 'fail';
     }
   }
+
+  Future<File> writeToTestFile(String text) async {
+    final file = await _localFile;
+
+    // Write the file
+    return file.writeAsString(text);
+  }
+  */
 }

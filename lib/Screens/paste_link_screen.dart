@@ -29,20 +29,30 @@ class _PasteLinkScreenState extends State<PasteLinkScreen> {
             GestureDetector(
               onTap: () async {
                 var link = _textEditingController.text;
-                //TODO: ADD VALIDATION FOR INCORRECT LINK
+
                 if (link.isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Please enter a link!')));
-                } else {
+                } else if (link.contains('&list')) {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text(
+                          'Video link contains playlist, please enter the video link exclusively!')));
+                } else if (link.contains('https://youtu.be/') ||
+                    (link.contains('https://www.youtube.com/watch?'))) {
                   final permissionStatus = await Permission.storage.request();
 
                   if (permissionStatus.isGranted) {
-                    //Download().downloadAudioToFile(link);
-                    Download().downloadUsingDestinyEDPlugin('testing', link);
+                    Download().downloadAudio(link);
                     _textEditingController.clear();
                   } else {
-                    inspect('Permission to External Storage not Granted');
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text(
+                            'Permission to storage not granted! Cannot download video.')));
                   }
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content:
+                          Text('Please enter a valid youtube video link!')));
                 }
               },
               child: Container(
@@ -60,6 +70,7 @@ class _PasteLinkScreenState extends State<PasteLinkScreen> {
                 ),
               ),
             ),
+            /* ----------------------------Testing--------------------------
             GestureDetector(
               onTap: () {
                 var text = _textEditingController.text;
@@ -103,6 +114,7 @@ class _PasteLinkScreenState extends State<PasteLinkScreen> {
                 ),
               ),
             ),
+            */
           ],
         ),
       ),
