@@ -19,6 +19,7 @@ class _PasteLinkScreenState extends State<PasteLinkScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        color: CustomColors.replyBlack(),
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
