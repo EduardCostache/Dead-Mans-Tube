@@ -2,8 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'package:youtube_downloader/custom_colors.dart';
-import 'package:youtube_downloader/downloader.dart';
+import 'package:youtube_downloader/style.dart';
 
 class BrowserScreen extends StatefulWidget {
   const BrowserScreen({Key? key}) : super(key: key);
@@ -54,7 +53,7 @@ class _BrowserScreenState extends State<BrowserScreen> {
 
                 //Download().downloadAudio(link!);
               },
-              backgroundColor: CustomColors.replyOrange(),
+              backgroundColor: CustomTheme.primaryColor(),
               child: const Icon(Icons.download),
             )
           : Container(),

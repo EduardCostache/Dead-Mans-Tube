@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:youtube_downloader/Screens/browser_screen.dart';
 import 'package:youtube_downloader/Screens/paste_link_screen.dart';
-import 'package:youtube_downloader/custom_colors.dart';
+import 'package:youtube_downloader/style.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -19,12 +19,12 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: _currentIndex == 0
           ? AppBar(
-              backgroundColor: CustomColors.replyOrange(),
+              backgroundColor: CustomTheme.primaryColor(),
               title: const Text('Youtube downloader'),
             )
           : null,
       bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: CustomColors.replyOrange(),
+        selectedItemColor: CustomTheme.primaryColor(),
         selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
         currentIndex: _currentIndex,
         items: bottomNavItems,
