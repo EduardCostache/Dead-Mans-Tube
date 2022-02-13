@@ -24,7 +24,8 @@ class _HomePageState extends State<HomePage> {
             )
           : null,
       bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: CustomTheme.primaryColor(),
+        selectedItemColor: Colors.white,
+        backgroundColor: CustomTheme.primaryColor(),
         selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
         currentIndex: _currentIndex,
         items: bottomNavItems,
