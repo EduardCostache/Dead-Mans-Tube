@@ -1,11 +1,13 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:youtube_downloader/style.dart';
 
+import '../downloader.dart';
+
 class BrowserScreen extends StatefulWidget {
   const BrowserScreen({Key? key}) : super(key: key);
+
+  //TODO: MAKE IT SO THAT USERS CANT BE REDIRECTED TO ANOTHER SITE OTHER THAN YOUTUBE. FOR EXMAPLE WHEN THEY CLICK ADS.
 
   @override
   _BrowserScreenState createState() => _BrowserScreenState();
@@ -17,15 +19,15 @@ class _BrowserScreenState extends State<BrowserScreen> {
   WebViewController? _controller;
 
   void checkIsVideo() async {
-    inspect(await _controller!.currentUrl());
-    if (await _controller!.currentUrl() == 'https://m.youtube.com/' ||
-        await _controller!.currentUrl() == _webViewLink) {
+    var url = await _controller!.currentUrl();
+
+    if (url!.contains('https://m.youtube.com/watch?')) {
       setState(() {
-        _showDownloadButton = false;
+        _showDownloadButton = true;
       });
     } else {
       setState(() {
-        _showDownloadButton = true;
+        _showDownloadButton = false;
       });
     }
   }
@@ -50,8 +52,12 @@ class _BrowserScreenState extends State<BrowserScreen> {
           ? FloatingActionButton(
               onPressed: () async {
                 var link = await _controller!.currentUrl();
+                link = link!.replaceAll('//m.', '//');
 
-                //Download().downloadAudio(link!);
+                if (link.contains('&list')) {
+                  link = link.split('&list')[0];
+                }
+                Download().downloadAudio(link);
               },
               backgroundColor: CustomTheme.primaryColor(),
               child: const Icon(Icons.download),

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:youtube_downloader/style.dart';
@@ -19,6 +17,7 @@ class _PasteLinkScreenState extends State<PasteLinkScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        color: CustomTheme.backgroundColor(),
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
