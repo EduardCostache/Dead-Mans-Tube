@@ -8,6 +8,8 @@ class BrowserScreen extends StatefulWidget {
   const BrowserScreen({Key? key}) : super(key: key);
 
   //TODO: MAKE IT SO THAT USERS CANT BE REDIRECTED TO ANOTHER SITE OTHER THAN YOUTUBE. FOR EXMAPLE WHEN THEY CLICK ADS.
+  //TODO: ADD LOADING SCREEN BEFORE WEBVIEW IS READY
+  //TODO: ADD THE SAME VIDEO INFO SCREEN AS FOR THE OTHER PAGE
 
   @override
   _BrowserScreenState createState() => _BrowserScreenState();

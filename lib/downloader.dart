@@ -4,24 +4,26 @@ import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 import 'package:flutter_youtube_downloader/flutter_youtube_downloader.dart';
 
 class Download {
-  Future<void> downloadAudio(String videoLink) async {
-    /*-----------Testing--------------
-    var testLinks = [
-      'https://youtu.be/yJvRUZp_Mp4',
-      'https://youtu.be/u3sK8TQ7rjQ',
-      'https://youtu.be/Wk8Sj70BeEU',
-      'https://youtu.be/UX6IqjhBtSw',
-      'https://youtu.be/6MvpZH7UwsI'
-    ];
-
-    var testLink = testLinks.last;
-    */
-
+  Future<Video> getVideo(String videoLink) async {
     var videoID = videoLink.substring(videoLink.length - 11);
     var yt = YoutubeExplode();
     var video = await yt.videos.get(videoID);
+    yt.close();
+    return video;
+  }
 
+  Future<StreamManifest> _getVideoManifest(String videoLink) async {
+    var videoID = videoLink.substring(videoLink.length - 11);
+    var yt = YoutubeExplode();
     var manifest = await yt.videos.streamsClient.getManifest(videoID);
+    yt.close();
+    return manifest;
+  }
+
+  Future<void> downloadAudio(String videoLink) async {
+    var video = await getVideo(videoLink);
+    var manifest = await _getVideoManifest(videoLink);
+
     var audio = manifest.audioOnly.first;
     var audioTag = audio.tag;
 
