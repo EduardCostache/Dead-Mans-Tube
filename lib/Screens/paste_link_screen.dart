@@ -4,7 +4,7 @@ import 'package:youtube_downloader/Screens/video_info_screen.dart';
 import 'package:youtube_downloader/style.dart';
 import 'package:youtube_downloader/downloader.dart';
 
-import 'loading.dart';
+import 'loading_screen.dart';
 
 class PasteLinkScreen extends StatefulWidget {
   const PasteLinkScreen({Key? key}) : super(key: key);
@@ -16,11 +16,11 @@ class PasteLinkScreen extends StatefulWidget {
 class _PasteLinkScreenState extends State<PasteLinkScreen> {
   final TextEditingController _textEditingController = TextEditingController();
 
-  bool loading = false;
+  bool _loading = false;
 
   @override
   Widget build(BuildContext context) {
-    return loading
+    return _loading
         ? const Loader()
         : Scaffold(
             body: Container(
@@ -66,7 +66,7 @@ class _PasteLinkScreenState extends State<PasteLinkScreen> {
                             //Download().downloadAudio(link);
                             //_textEditingController.clear();
                             setState(() {
-                              loading = true;
+                              _loading = true;
                             });
 
                             var video = await Download().getVideo(link);
@@ -79,7 +79,7 @@ class _PasteLinkScreenState extends State<PasteLinkScreen> {
                             // After awaiting for the navigator to pop back from the video page, we call setState and change loading to false so that
                             // the screen won't be stuck on loading
                             setState(() {
-                              loading = false;
+                              _loading = false;
                             });
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(

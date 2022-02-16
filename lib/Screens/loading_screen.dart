@@ -11,7 +11,7 @@ class Loader extends StatelessWidget {
       color: CustomTheme.backgroundColor(),
       child: Center(
         child: SpinKitFadingCircle(
-          color: CustomTheme.primaryColor(),
+          color: CustomTheme.seconddaryColor(),
           size: 50.0,
         ),
       ),

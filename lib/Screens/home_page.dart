@@ -3,8 +3,6 @@ import 'package:youtube_downloader/Screens/browser_screen.dart';
 import 'package:youtube_downloader/Screens/paste_link_screen.dart';
 import 'package:youtube_downloader/style.dart';
 
-import 'loading.dart';
-
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -16,7 +14,6 @@ class _HomePageState extends State<HomePage> {
   //Index 0 = Paste Link
   //Index 1 = Browse
   int _currentIndex = 0;
-  bool loading = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,11 +32,10 @@ class _HomePageState extends State<HomePage> {
         onTap: (value) {
           setState(() {
             _currentIndex = value;
-            loading = true;
           });
         },
       ),
-      body: loading ? const Loader() : screens[_currentIndex],
+      body: screens[_currentIndex],
     );
   }
 
