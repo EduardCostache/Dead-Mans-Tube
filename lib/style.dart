@@ -5,7 +5,7 @@ class CustomTheme {
     return Colors.lightBlue.shade600;
   }
 
-  static Color seconddaryColor() {
+  static Color secondaryColor() {
     return Colors.blueGrey.shade600;
   }
 
