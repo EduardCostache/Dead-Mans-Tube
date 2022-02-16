@@ -20,14 +20,13 @@ class Download {
     return manifest;
   }
 
-  Future<void> downloadAudio(String videoLink) async {
-    var video = await getVideo(videoLink);
+  Future<void> downloadAudio(String videoLink, String userTitle) async {
     var manifest = await _getVideoManifest(videoLink);
 
     var audio = manifest.audioOnly.first;
     var audioTag = audio.tag;
 
-    var fileName = '${video.title}.';
+    var fileName = '$userTitle.';
 
     inspect(manifest);
     inspect(audio);

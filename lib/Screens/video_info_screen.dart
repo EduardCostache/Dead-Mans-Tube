@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:youtube_downloader/style.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
+import '../downloader.dart';
+
 class VideoInfoPage extends StatefulWidget {
   final Video video;
 
@@ -78,7 +80,22 @@ class _VideoInfoPageState extends State<VideoInfoPage> {
                 ),
               ),
               onPressed: () async {
-                //TODO: DOWNLOAD THE VIDEO HERE
+                var title = _textEditingController.text;
+
+                if (title.endsWith('.') ||
+                    title.endsWith('/') ||
+                    title.endsWith(' ')) {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text(
+                          "Video title cannot end with a '.', '/' or a space!")));
+                } else if (title.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text('Video title cannot be empty!')));
+                } else {
+                  setState(() {});
+                  Download().downloadAudio(widget.video.url, title);
+                  Navigator.pop(context);
+                }
               },
               child: const Text('Confirm'),
             ),
