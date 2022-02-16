@@ -110,7 +110,7 @@ class _BrowserScreenState extends State<BrowserScreen> {
                               'Permission to storage not granted! Cannot download video.')));
                     }
                   },
-                  backgroundColor: CustomTheme.primaryColor(),
+                  backgroundColor: CustomTheme.secondaryColor(),
                   child: const Icon(Icons.download),
                 )
               : Container(),

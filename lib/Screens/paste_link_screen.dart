@@ -40,7 +40,7 @@ class _PasteLinkScreenState extends State<PasteLinkScreen> {
                     child: ElevatedButton.icon(
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
-                          CustomTheme.primaryColor(),
+                          CustomTheme.secondaryColor(),
                         ),
                         padding: MaterialStateProperty.all(
                           const EdgeInsets.all(20),
