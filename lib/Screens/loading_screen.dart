@@ -10,7 +10,7 @@ class Loader extends StatelessWidget {
     return Container(
       color: CustomTheme.backgroundColor(),
       child: Center(
-        child: SpinKitFadingCircle(
+        child: SpinKitDualRing(
           color: CustomTheme.secondaryColor(),
           size: 50.0,
         ),
