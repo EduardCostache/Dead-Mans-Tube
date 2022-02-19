@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
       appBar: _currentIndex == 0
           ? AppBar(
               backgroundColor: CustomTheme.primaryColor(),
-              title: const Text('YT Hijack'),
+              title: const Text('Dead-Man\'s Tube'),
             )
           : null,
       bottomNavigationBar: BottomNavigationBar(
