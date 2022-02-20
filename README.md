@@ -1,4 +1,4 @@
-# Dead Man's Tube
+# Dead Man's Tube: A youtube sound downloader
 ## Description
 Dead Man's Tube is flutter application for downloading music from YouTube to your phone. 
 Dead Man's Tube downloads the sounds into a .mp4 file which can be seen by other application on your device.
