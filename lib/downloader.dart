@@ -26,13 +26,7 @@ class Download {
     var audio = manifest.audioOnly.first;
     var audioTag = audio.tag;
 
-    var fileName = '$userTitle.';
-
-    inspect(manifest);
-    inspect(audio);
-    inspect(fileName);
-
-    await FlutterYoutubeDownloader.downloadVideo(videoLink, fileName, audioTag);
+    FlutterYoutubeDownloader.downloadVideo(videoLink, userTitle, audioTag);
   }
 
   /* --------------------Testing-----------------------*/

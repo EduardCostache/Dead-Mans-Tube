@@ -80,6 +80,7 @@ class _PasteLinkScreenState extends State<PasteLinkScreen> {
                             // the screen won't be stuck on loading
                             setState(() {
                               _loading = false;
+                              _textEditingController.clear();
                             });
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
