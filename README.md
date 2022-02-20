@@ -13,7 +13,7 @@ If you have a music player such as Samsung Music installed on your device, the .
 ## How to use
 Google does not allow the distribution of 'youtube downloaders' due to terms of service. Therefore, this app cannot be published onto the Google Play store.
 
-APK file coming soon however.
+You can find the .apk file under First Release on the right.
 
 ## Warning
 Currently the application is aimed towards android. No current plans to adapt it for IOS.
